@@ -46,6 +46,7 @@ public class DlgPrikazNastupa extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
 
+<<<<<<< HEAD
        
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(25, 25, 384, 170); 
@@ -108,6 +109,70 @@ public class DlgPrikazNastupa extends JDialog {
             textAreaPrikazNastupa.setText(tekst.toString());
 
             
+=======
+        // Create JScrollPane
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(25, 25, 384, 170); // Adjusted bounds to fit within the dialog
+        contentPanel.add(scrollPane);
+
+        // Create JTextArea and add it to JScrollPane
+        textAreaPrikazNastupa = new JTextArea(); // Initialize the class attribute
+        scrollPane.setViewportView(textAreaPrikazNastupa);
+
+        // Create button panel
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+        // OK button
+        JButton okButton = new JButton("OK");
+        okButton.setActionCommand("OK");
+        okButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the dialog
+            }
+        });
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
+
+        // Cancel button
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setActionCommand("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close the dialog
+            }
+        });
+        buttonPane.add(cancelButton);
+
+        // Call method to select and display performances
+        selectPrikazNastupa();
+    }
+
+    private void selectPrikazNastupa() {
+        try {
+            // Establish database connection
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Connection conn = DriverManager.getConnection("jdbc:mysql://ucka.veleri.hr/mroncevic?user=mroncevic&password=11");
+
+            // Execute query
+            String sql = "SELECT * FROM Nastup";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Prepare text for JTextArea
+            StringBuilder tekst = new StringBuilder();
+            while (rs.next()) {
+                tekst.append("Datum nastupa: ").append(rs.getString("Datum_nastupa")).append("\t");
+                tekst.append("Mjesto nastupa: ").append(rs.getString("Mjesto_nastupa")).append("\t");
+                tekst.append("Šifra izvođača: ").append(rs.getString("Sifra_izvodaca")).append("\n");
+            }
+
+            // Set text in JTextArea
+            textAreaPrikazNastupa.setText(tekst.toString());
+
+            // Close database connection
+>>>>>>> branch 'Main' of https://github.com/marti122/Projekt_EventUp.git
             conn.close();
 
         } catch (Exception ex) {

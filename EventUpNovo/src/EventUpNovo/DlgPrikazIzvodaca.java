@@ -59,6 +59,7 @@ public class DlgPrikazIzvodaca extends JDialog {
         cancelButton.addActionListener(e -> dispose());
         buttonPane.add(cancelButton);
 
+<<<<<<< HEAD
        
         JScrollPane scrollPane = new JScrollPane();
         getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -88,6 +89,37 @@ public class DlgPrikazIzvodaca extends JDialog {
                 tekst.append("Ime izvođača: ").append(rs.getString("ime_izvodaca")).append("\t");
                 tekst.append("Prezime izvođača: ").append(rs.getString("prezime_izvodaca")).append("\t");
                 tekst.append("Umjetničko ime: ").append(rs.getString("umjetnickoIme_izvodaca")).append("\t");
+=======
+        // Scroll pane
+        JScrollPane scrollPane = new JScrollPane();
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        // Text area for displaying data
+        textArea_PrikazIzvodaca = new JTextArea();
+        scrollPane.setViewportView(textArea_PrikazIzvodaca);
+
+        // Load data into text area
+        selectPrikazIzvodaca();
+    }
+
+    private void selectPrikazIzvodaca() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://ucka.veleri.hr/mroncevic?user=mroncevic&password=11"
+            );
+
+            String sql = "SELECT * FROM Izvodac";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            StringBuilder tekst = new StringBuilder();
+            while (rs.next()) {
+                tekst.append("Šifra izvođača: ").append(rs.getString("sifra_izvodaca")).append("\n");
+                tekst.append("Ime izvođača: ").append(rs.getString("ime_izvodaca")).append("\n");
+                tekst.append("Prezime izvođača: ").append(rs.getString("prezime_izvodaca")).append("\n");
+                tekst.append("Umjetničko ime: ").append(rs.getString("umjetnickoIme_izvodaca")).append("\n");
+>>>>>>> branch 'Main' of https://github.com/marti122/Projekt_EventUp.git
                 tekst.append("Kontakt izvođača: ").append(rs.getString("kontakt_izvodaca")).append("\n\n");
             }
 

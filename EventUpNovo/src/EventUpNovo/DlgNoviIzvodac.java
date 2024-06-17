@@ -113,6 +113,7 @@ public class DlgNoviIzvodac extends JDialog {
                             "jdbc:mysql://ucka.veleri.hr/mroncevic?" +
                             "user=mroncevic&password=11");
                         
+<<<<<<< HEAD
                         String sifraIzvodaca = textField_SifraIzvodaca.getText();
                         String imeIzvodaca = textField_ImeIzvodaca.getText();
                         String umjetnickoImeIzvodaca = textField_UmjetnickoImeIzvodaca.getText();
@@ -132,6 +133,15 @@ public class DlgNoviIzvodac extends JDialog {
                         stmt.setString(5, textField_KontakIzvodaca.getText());
                         
                    
+=======
+                        String sql = "INSERT INTO Izvodac (Sifra_izvodaca, Ime_izvodaca, Prezime_izvodaca, UmjetnickoIme_izvodaca, Kontakt_izvodaca) VALUES (?, ?, ?, ?, ?)";
+                        PreparedStatement stmt = conn.prepareStatement(sql);
+                        stmt.setString(1, textField_SifraIzvodaca.getText());
+                        stmt.setString(2, textField_ImeIzvodaca.getText());
+                        stmt.setString(3, textField_PrezimeIzvodaac.getText());
+                        stmt.setString(4, textField_UmjetnickoImeIzvodaca.getText());
+                        stmt.setString(5, textField_KontakIzvodaca.getText());
+>>>>>>> branch 'Main' of https://github.com/marti122/Projekt_EventUp.git
                         
                         stmt.execute();
                         
